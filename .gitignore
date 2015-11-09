@@ -1,0 +1,3 @@
+*.tar.gz
+DBIx-Class-QueryLog-*
+.build

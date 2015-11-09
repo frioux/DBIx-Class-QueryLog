@@ -1,4 +1,5 @@
 package DBIx::Class::QueryLog::Transaction;
+
 use Moose;
 
 extends 'DBIx::Class::QueryLog::Query';

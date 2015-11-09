@@ -1,4 +1,5 @@
 package DBIx::Class::QueryLog::Query;
+
 use Moose;
 
 has bucket => (
