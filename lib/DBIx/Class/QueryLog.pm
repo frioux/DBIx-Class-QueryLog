@@ -61,8 +61,6 @@ DBIx::Class::QueryLog - Log queries for later analysis.
 
 =cut
 
-our $VERSION = '1.3.3';
-
 =head1 SYNOPSIS
 
 DBIx::Class::QueryLog 'logs' each transaction and query executed so you can
