@@ -10,7 +10,11 @@ BEGIN {
 }
 require_ok('DBIx::Class::QueryLog::Analyzer');
 
-my $ql = DBIx::Class::QueryLog->new;
+my $time = 0;
+
+my $ql = DBIx::Class::QueryLog->new(
+    __time => sub { $time },
+);
 ok($ql->isa('DBIx::Class::QueryLog'), 'new');
 
 $ql->query_start('SELECT * from foo');
@@ -22,7 +26,7 @@ $ql->query_start('SELECT * from foo');
 $ql->query_end('SELECT * from foo');
 
 $ql->query_start('SELECT * from bar');
-sleep(1);
+$time += 1;
 $ql->query_end('SELECT * from bar');
 
 $ql->txn_commit;

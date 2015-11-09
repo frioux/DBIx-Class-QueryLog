@@ -8,7 +8,11 @@ use DBIx::Class::QueryLog::Analyzer;
 use DBIx::Class::QueryLog::Query;
 use DBIx::Class::QueryLog::Transaction;
 
-my $ql = DBIx::Class::QueryLog->new;
+my $time = 0;
+
+my $ql = DBIx::Class::QueryLog->new(
+    __time => sub { $time },
+);
 $ql->query_start('SELECT * from foo', 'fast');
 $ql->query_end('SELECT * from foo', 'fast');
 
@@ -16,12 +20,12 @@ $ql->query_start('SELECT * from foo2', 'fast');
 $ql->query_end('SELECT * from foo2', 'fast');
 
 $ql->query_start('SELECT * from foo', 'slow');
-sleep(3);
+$time += 3;
 $ql->query_end('SELECT * from foo', 'slow');
 
 $ql->txn_begin;
 $ql->query_start('SELECT * from foo', 'medium');
-sleep(2);
+$time += 2;
 $ql->query_end('SELECT * from foo', 'medium');
 $ql->txn_commit;
 

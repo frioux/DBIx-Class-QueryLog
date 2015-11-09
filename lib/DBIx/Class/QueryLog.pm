@@ -35,6 +35,13 @@ has passthrough => (
     default => 0
 );
 
+has __time => (
+    is => 'ro',
+    default => sub { \&Time::HiRes::time },
+);
+
+sub _time { shift->__time->() }
+
 before 'add_to_log' => sub {
     my ($self, $thing) = @_;
 
@@ -173,7 +180,7 @@ sub txn_begin {
     $self->next::method(@_) if $self->passthrough;
     $self->current_transaction(
         $self->transaction_class()->new({
-            start_time => Time::HiRes::time
+            start_time => $self->_time,
         })
     );
 }
@@ -190,7 +197,7 @@ sub txn_commit {
     $self->next::method(@_) if $self->passthrough;
     if(defined($self->current_transaction)) {
         my $txn = $self->current_transaction;
-        $txn->end_time(Time::HiRes::time);
+        $txn->end_time($self->_time);
         $txn->committed(1);
         $txn->rolledback(0);
         $self->add_to_log($txn);
@@ -212,7 +219,7 @@ sub txn_rollback {
     $self->next::method(@_) if $self->passthrough;
     if(defined($self->current_transaction)) {
         my $txn = $self->current_transaction;
-        $txn->end_time(Time::HiRes::time);
+        $txn->end_time($self->_time);
         $txn->committed(0);
         $txn->rolledback(1);
         $self->add_to_log($txn);
@@ -236,7 +243,7 @@ sub query_start {
     $self->next::method($sql, @params) if $self->passthrough;
     $self->current_query(
         $self->query_class()->new({
-            start_time  => Time::HiRes::time,
+            start_time  => $self->_time,
             sql         => $sql,
             params      => \@params,
         })
@@ -255,7 +262,7 @@ sub query_end {
     $self->next::method(@_) if $self->passthrough;
     if(defined($self->current_query)) {
         my $q = $self->current_query;
-        $q->end_time(Time::HiRes::time);
+        $q->end_time($self->_time);
         $q->bucket($self->bucket);
         if(defined($self->current_transaction)) {
             $self->current_transaction->add_to_queries($q);
