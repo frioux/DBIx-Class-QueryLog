@@ -1,9 +1,11 @@
 package DBIx::Class::QueryLog::Analyzer;
-use Moose;
+
+use Moo;
+use Types::Standard 'InstanceOf';
 
 has querylog => (
     is => 'rw',
-    isa => 'DBIx::Class::QueryLog'
+    isa => InstanceOf['DBIx::Class::QueryLog']
 );
 
 =head1 NAME
@@ -183,7 +185,5 @@ This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
-
-__PACKAGE__->meta->make_immutable;
 
 1;

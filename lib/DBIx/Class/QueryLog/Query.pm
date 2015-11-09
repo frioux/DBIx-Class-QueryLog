@@ -1,30 +1,31 @@
 package DBIx::Class::QueryLog::Query;
 
-use Moose;
+use Moo;
+use Types::Standard qw( Str Num ArrayRef );
 
 has bucket => (
     is => 'rw',
-    isa => 'Str'
+    isa => Str
 );
 
 has end_time => (
     is => 'rw',
-    isa => 'Num'
+    isa => Num
 );
 
 has params => (
     is => 'rw',
-    isa => 'ArrayRef'
+    isa => ArrayRef
 );
 
 has sql => (
     is => 'rw',
-    isa => 'Str'
+    isa => Str
 );
 
 has start_time => (
     is => 'rw',
-    isa => 'Num'
+    isa => Num
 );
 
 =head1 NAME
@@ -124,7 +125,5 @@ This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
-
-__PACKAGE__->meta->make_immutable;
 
 1;

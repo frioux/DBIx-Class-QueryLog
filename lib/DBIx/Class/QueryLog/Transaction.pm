@@ -1,28 +1,28 @@
 package DBIx::Class::QueryLog::Transaction;
 
-use Moose;
+use Moo;
+use Types::Standard qw( Bool ArrayRef );
 
 extends 'DBIx::Class::QueryLog::Query';
 
 has committed => (
     is => 'rw',
-    isa => 'Bool'
+    isa => Bool
 );
 
 has queries => (
     traits => [qw(Array)],
     is => 'rw',
-    isa => 'ArrayRef',
+    isa => ArrayRef,
     default => sub { [] },
-    handles => {
-        count => 'count',
-        add_to_queries => 'push'
-    }
 );
+
+sub add_to_queries { push @{shift->queries}, @_ }
+sub count { scalar @{shift->log} }
 
 has rolledback => (
     is => 'rw',
-    isa => 'Bool'
+    isa => Bool
 );
 
 =head1 NAME
@@ -125,7 +125,5 @@ This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
-
-__PACKAGE__->meta->make_immutable;
 
 1;

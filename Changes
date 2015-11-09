@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Replace Moose with Moo
 
 1.3.3
   - Bump M:I version

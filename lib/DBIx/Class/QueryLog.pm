@@ -1,37 +1,37 @@
 package DBIx::Class::QueryLog;
 
-use Moose;
+use Moo;
+use Types::Standard qw( Str Maybe ArrayRef Bool InstanceOf );
 
 has bucket => (
     is => 'rw',
-    isa => 'Str',
+    isa => Str,
     default => sub { 'default' }
 );
 
 has current_query => (
     is => 'rw',
-    isa => 'Maybe[DBIx::Class::QueryLog::Query]'
+    isa => Maybe[InstanceOf['DBIx::Class::QueryLog::Query']]
 );
 
 has current_transaction => (
     is => 'rw',
-    isa => 'Maybe[DBIx::Class::QueryLog::Transaction]'
+    isa => Maybe[InstanceOf['DBIx::Class::QueryLog::Transaction']]
 );
 
 has log => (
     traits => [qw(Array)],
     is => 'rw',
-    isa => 'ArrayRef',
+    isa => ArrayRef,
     default => sub { [] },
-    handles => {
-        add_to_log => 'push',
-        reset => 'clear'
-    }
 );
+
+sub add_to_log { push @{shift->log}, @_ }
+sub reset { shift->log([]) }
 
 has passthrough => (
     is => 'rw',
-    isa => 'Bool',
+    isa => Bool,
     default => 0
 );
 
