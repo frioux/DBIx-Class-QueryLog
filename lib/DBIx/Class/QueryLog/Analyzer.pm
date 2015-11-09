@@ -1,5 +1,7 @@
 package DBIx::Class::QueryLog::Analyzer;
 
+# ABSTRACT: Query Analysis
+
 use Moo;
 use Types::Standard 'InstanceOf';
 
@@ -7,10 +9,6 @@ has querylog => (
     is => 'rw',
     isa => InstanceOf['DBIx::Class::QueryLog']
 );
-
-=head1 NAME
-
-DBIx::Class::QueryLog::Analyzer - Query Analysis
 
 =head1 SYNOPSIS
 

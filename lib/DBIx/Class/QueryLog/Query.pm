@@ -1,5 +1,7 @@
 package DBIx::Class::QueryLog::Query;
 
+# ABSTRACT: A Query
+
 use Moo;
 use Types::Standard qw( Str Num ArrayRef );
 
@@ -27,10 +29,6 @@ has start_time => (
     is => 'rw',
     isa => Num
 );
-
-=head1 NAME
-
-DBIx::Class::QueryLog::Query - A Query
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,7 @@
 package DBIx::Class::QueryLog;
 
+# ABSTRACT: Log queries for later analysis.
+
 use Moo;
 use Types::Standard qw( Str Maybe ArrayRef Bool InstanceOf );
 
@@ -54,12 +56,6 @@ use Time::HiRes;
 
 use DBIx::Class::QueryLog::Query;
 use DBIx::Class::QueryLog::Transaction;
-
-=head1 NAME
-
-DBIx::Class::QueryLog - Log queries for later analysis.
-
-=cut
 
 =head1 SYNOPSIS
 

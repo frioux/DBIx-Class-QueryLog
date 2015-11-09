@@ -1,5 +1,7 @@
 package DBIx::Class::QueryLog::Transaction;
 
+# ABSTRACT: A Transaction
+
 use Moo;
 use Types::Standard qw( Bool ArrayRef );
 
@@ -24,10 +26,6 @@ has rolledback => (
     is => 'rw',
     isa => Bool
 );
-
-=head1 NAME
-
-DBIx::Class::QueryLog::Transaction - A Transaction
 
 =head1 SYNOPSIS
 
