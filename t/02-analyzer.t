@@ -1,8 +1,9 @@
-#!perl -T
+#!perl
 
 use strict;
 use warnings;
-use Test::More tests => 14;
+
+use Test::More;
 
 BEGIN {
     use_ok('DBIx::Class::QueryLog');
@@ -52,3 +53,5 @@ cmp_ok($analyzed->{$keys[1]}->{'count'}, '==', 2, '2 executions');
 ok($analyzed->{$keys[0]}->{'time_elapsed'}, 'Total time');
 cmp_ok(scalar(@{$analyzed->{$keys[0]}->{'queries'}}), '==', 1, '1 stored queries');
 cmp_ok(scalar(@{$analyzed->{$keys[1]}->{'queries'}}), '==', 2, '2 stored queries');
+
+done_testing;

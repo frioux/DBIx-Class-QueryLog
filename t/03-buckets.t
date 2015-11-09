@@ -1,7 +1,9 @@
 #!perl
+
 use strict;
 use warnings;
-use Test::More tests => 5;
+
+use Test::More;
 
 use DBIx::Class::QueryLog;
 use DBIx::Class::QueryLog::Analyzer;
@@ -29,3 +31,5 @@ my $ana = DBIx::Class::QueryLog::Analyzer->new({
 });
 my $total = $ana->get_totaled_queries_by_bucket;
 cmp_ok(scalar(keys(%{ $total })), '==', 2, '2 buckets');
+
+done_testing;

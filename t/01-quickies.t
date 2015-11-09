@@ -2,7 +2,8 @@
 
 use strict;
 use warnings;
-use Test::More tests => 12;
+
+use Test::More;
 
 use DBIx::Class::QueryLog;
 use DBIx::Class::QueryLog::Query;
@@ -59,3 +60,5 @@ SELECT * from foo:
 SELECT * from foo: 
 ROLLBACK
 EOF
+
+done_testing;

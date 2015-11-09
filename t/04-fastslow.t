@@ -1,7 +1,9 @@
 #!perl
+
 use strict;
 use warnings;
-use Test::More tests => 9;
+
+use Test::More;
 
 use DBIx::Class::QueryLog;
 use DBIx::Class::QueryLog::Analyzer;
@@ -46,3 +48,5 @@ cmp_ok(scalar(@{ $fast }), '==', 3, '3 executions found');
 cmp_ok($fast->[2]->params->[0], 'eq', 'slow', 'fast executions 2');
 cmp_ok($fast->[1]->params->[0], 'eq', 'medium', 'fast executions 1');
 cmp_ok($fast->[0]->params->[0], 'eq', 'fast', 'fast executions 0');
+
+done_testing;
