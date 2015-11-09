@@ -169,19 +169,4 @@ sub get_totaled_queries_by_bucket {
     return \%totaled;
 }
 
-=head1 AUTHOR
-
-Cory G Watson C<< <gphat at cpan.org> >>
-
-=head1 ACKNOWLEDGEMENTS
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Cory G Watson, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
-
 1;

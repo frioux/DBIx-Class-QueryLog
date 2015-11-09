@@ -109,19 +109,4 @@ sub get_sorted_queries {
     return [ reverse sort { $a->time_elapsed <=> $b->time_elapsed } @qs ];
 }
 
-=head1 AUTHOR
-
-Cory G Watson, C<< <gphat at cpan.org> >>
-
-=head1 ACKNOWLEDGEMENTS
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Cory G Watson, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
-
 1;

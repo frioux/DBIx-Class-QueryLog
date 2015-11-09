@@ -287,19 +287,4 @@ sub query_class       { 'DBIx::Class::QueryLog::Query' }
 
 sub transaction_class { 'DBIx::Class::QueryLog::Transaction' }
 
-=head1 AUTHOR
-
-Cory G Watson, C<< <gphat at cpan.org> >>
-
-with some contributions from David Cantrell
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Cory G Watson, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
-
 1;
