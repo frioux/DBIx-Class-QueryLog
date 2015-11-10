@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.004000  2015-11-10 09:26:48-08:00 America/Los_Angeles
   - Replace Moose with Moo
 
 1.3.3
