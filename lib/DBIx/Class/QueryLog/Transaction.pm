@@ -69,14 +69,14 @@ Time this transaction took to execute.  start - end.
 
 =cut
 sub time_elapsed {
-	my $self = shift;
+    my $self = shift;
 
-	my $total = 0;
-	foreach my $q (@{ $self->queries }) {
-		$total += $q->time_elapsed;
-	}
+    my $total = 0;
+    foreach my $q (@{ $self->queries }) {
+        $total += $q->time_elapsed;
+    }
 
-	return $total;
+    return $total;
 }
 
 =head2 add_to_queries

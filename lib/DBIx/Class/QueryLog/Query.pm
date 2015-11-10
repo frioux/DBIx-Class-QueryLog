@@ -63,9 +63,9 @@ Time this query took to execute.  start - end.
 =cut
 
 sub time_elapsed {
-	my $self = shift;
+    my $self = shift;
 
-	return $self->end_time - $self->start_time;
+    return $self->end_time - $self->start_time;
 }
 
 =head2 count

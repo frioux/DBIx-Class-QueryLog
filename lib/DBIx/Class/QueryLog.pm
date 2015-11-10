@@ -65,7 +65,7 @@ in DBIx::Class:
 
     use DBIx::Class::QueryLog;
     use DBIx::Class::QueryLog::Analyzer;
-    
+
     my $schema = ... # Get your schema!
     my $ql = DBIx::Class::QueryLog->new;
     $schema->storage->debugobj($ql);

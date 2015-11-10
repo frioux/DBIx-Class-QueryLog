@@ -103,7 +103,7 @@ This is useful for when you've fine-tuned individually slow queries and need
 to isolate which queries are executed a lot, so that you can determine which
 to focus on next.
 
-To sort it you'll want to use something like this (sorry for the long line, 
+To sort it you'll want to use something like this (sorry for the long line,
 blame perl...):
 
     my $analyzed = $ana->get_totaled_queries;
