@@ -5,11 +5,8 @@ use warnings;
 
 use Test::More;
 
-BEGIN {
-    use_ok('DBIx::Class::QueryLog');
-    use_ok('DBIx::Class::QueryLog::Analyzer');
-}
-require_ok('DBIx::Class::QueryLog::Analyzer');
+use DBIx::Class::QueryLog;
+use DBIx::Class::QueryLog::Analyzer;
 
 my $time = 0;
 
