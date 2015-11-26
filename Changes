@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fix regression in ::Transaction->count (Thanks Alexander Hartmaier!)
 
 1.004000  2015-11-10 09:26:48-08:00 America/Los_Angeles
   - Replace Moose with Moo

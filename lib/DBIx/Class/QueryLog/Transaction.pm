@@ -20,7 +20,7 @@ has queries => (
 );
 
 sub add_to_queries { push @{shift->queries}, @_ }
-sub count { scalar @{shift->log} }
+sub count { scalar @{shift->queries} }
 
 has rolledback => (
     is => 'rw',

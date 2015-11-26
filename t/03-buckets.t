@@ -19,6 +19,8 @@ $ql->bucket('foo');
 $ql->txn_begin;
 $ql->query_start('SELECT * from foo');
 $ql->query_end('SELECT * from foo');
+is($ql->current_transaction->count, 1, 'count of ::Transaction works');
+
 $ql->txn_commit;
 cmp_ok($ql->log->[1]->bucket, 'eq', 'foo', 'foo bucket');
 
