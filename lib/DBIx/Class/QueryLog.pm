@@ -3,7 +3,7 @@ package DBIx::Class::QueryLog;
 # ABSTRACT: Log queries for later analysis.
 
 use Moo;
-use Types::Standard qw( Str Maybe ArrayRef Bool InstanceOf );
+use Types::Standard qw( Str Maybe ArrayRef Bool InstanceOf Int );
 
 has bucket => (
     is => 'rw',
@@ -21,6 +21,39 @@ has current_transaction => (
     isa => Maybe[InstanceOf['DBIx::Class::QueryLog::Transaction']]
 );
 
+has max_log_event => (
+    is => 'rw',
+    lazy => 1,
+    clearer => 'reset_max_log_event',
+    builder => 'max_log_event_generator',
+);
+
+sub max_event_generator_template {
+    my ($class, $max) = @_;
+
+    sub {
+        my $self = shift;
+
+        my $i = 0;
+
+        sub {
+            return unless $i++ == $max;
+
+            my $self = shift;
+            warn "Exceeded max log size of $max" .
+                '; consider calling ->reset to avoid memory leakage'
+        }
+    }
+}
+
+sub max_log_event_generator { $_[0]->_max_log_event_generator->($_[0]) }
+has _max_log_event_generator => (
+    is => 'ro',
+    init_arg => 'max_log_event_generator',
+    lazy => 1,
+    default => sub { shift->max_event_generator_template(1_000) },
+);
+
 has log => (
     traits => [qw(Array)],
     is => 'rw',
@@ -28,7 +61,12 @@ has log => (
     default => sub { [] },
 );
 
-sub add_to_log { push @{shift->log}, @_ }
+sub add_to_log {
+    my $self = shift;
+
+    $self->max_log_event->($self);
+    push @{$self->log}, @_
+}
 sub reset { shift->log([]) }
 
 has passthrough => (
@@ -259,6 +297,7 @@ sub query_end {
         $q->end_time($self->_time);
         $q->bucket($self->bucket);
         if(defined($self->current_transaction)) {
+            $self->max_log_event->($self);
             $self->current_transaction->add_to_queries($q);
         } else {
             $self->add_to_log($q)
