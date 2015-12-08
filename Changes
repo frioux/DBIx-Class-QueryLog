@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fix bug in ->reset in ::NotifyOnMax
 
 1.005000  2015-12-07 16:08:51-08:00 America/Los_Angeles
   - Add ::NotifyOnMax subclass to help avoid leaks

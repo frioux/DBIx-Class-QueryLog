@@ -38,7 +38,7 @@ sub reset {
 
    $self->next::method(@rest);
 
-   $self->_warned(undef);
+   $self->notified(undef);
 }
 
 1;
